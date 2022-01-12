@@ -1,5 +1,5 @@
 import os 
-os.system("python -m pip install --upgrade pip")
+os.system("/home/appuser/venv/bin/python -m pip install --upgrade pip")
 
 import streamlit as st
 import spacy
