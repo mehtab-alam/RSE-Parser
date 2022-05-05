@@ -47,5 +47,9 @@ Here is an example of input text with output having higlighted realtive spatial 
 I am including some different relative spatial locations for the sack of example like north of America, south america, south of the GERMANY, north-east belgium and north of the France etc. If we go to some of the examples in cities like north of montpellier and south paris. 
 ```
 
+**Expected Running time duration**
+Expected running time of an example may be between 1-2 minutes. 
+
+
 **Ouput**
 ![Example Output](example_rsi.png)
