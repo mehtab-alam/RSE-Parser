@@ -14,9 +14,10 @@ HTML = "<a href='https://www.teacheron.com/tutor-profile/4uQK?r=4uQK' target='_b
 def removeStopwords(text):
     return remove_stopwords(text)
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 def addPatterns():
     
+    st.write("Data not loaded from cache..")
     #regex = r"(?:(?:north|south|center|central)(?:[\s+|-](?:east|west))?|east|west)"   
     regexKeyword = r'(?i)(surround|near|next|close)'   
     regexDistanceKeyword = r'(?i)(miles|kilometer|km)'
@@ -54,25 +55,25 @@ def addPatterns():
     
     return patterns  
  
+@st.cache(allow_output_mutation=True)
+def init_custom_ner():
+    nlp = English()
+    ruler = nlp.add_pipe("entity_ruler", config={"validate": True})
+    ruler.from_disk("pipeline/entity_ruler/")
+    return nlp
+
 
 def main():
 	
 	#st.set_page_config(layout="wide")
 	
     st.title("GeoX - RSI Extraction")
-    print("spacy=="+spacy.__version__)
-    print("gensim=="+gensim.__version__)
-    print("streamlit=="+st.__version__)
-    print("pandas=="+pd.__version__)
     
     user_input = st.text_area("Enter your text", "I am including some different relative spatial locations for the sack of example like north of America, south america, south of the GERMANY, north-east belgium and north of the France etc. If we go to some of the examples in cities like north of montpellier and south paris. Moreover, if we look to some other cities like north Innsbruck, south of munich, east berlin and South of AMSTERDAM. Moreover, there are some other spatial entities like surrounding of Montpellier, nearby Lyon, West to Bolzano, 80 km from Paris.")
     if st.button('Extract') and len(user_input) > 0:
         
-        nlp = English()
-        ruler = nlp.add_pipe("entity_ruler", config={"validate": True})
-        patterns = addPatterns()
-        ruler.add_patterns(patterns)
-        nlp.to_disk("pipeline")
+        nlp = init_custom_ner()
+        #nlp.to_disk("pipeline")
         doc = nlp(removeStopwords(user_input))
         html = displacy.render(doc,style="ent")
         html = html.replace("\n","")
