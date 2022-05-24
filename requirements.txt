@@ -3,3 +3,4 @@ gensim==4.0.1
 streamlit==0.80.0
 spacy-streamlit==1.0.1
 typer==0.4.0
+click<=8.0.1
