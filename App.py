@@ -69,7 +69,7 @@ def main():
 	
     st.title("GeoX - RSI Extraction")
     
-    user_input = st.text_area("Enter your text", "I am including some different relative spatial locations for the sack of example like north of America, south america, south of the GERMANY, north-east belgium and north of the France etc. If we go to some of the examples in cities like north of montpellier and south paris. Moreover, if we look to some other cities like north Innsbruck, south of munich, east berlin and South of AMSTERDAM. Moreover, there are some other spatial entities like surrounding of Montpellier, nearby Lyon, West to Bolzano, 80 km from Paris.")
+    user_input = st.text_area("Enter your text", "")
     if st.button('Extract') and len(user_input) > 0:
         
         nlp = init_custom_ner()
